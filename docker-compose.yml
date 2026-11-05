@@ -1,0 +1,20 @@
+name: siklus-web
+services:
+  web:
+    image: ${IMAGE:?IMAGE is required}
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "127.0.0.1:3000:3000"
+    networks:
+      siklus:
+        aliases: [web]
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+networks:
+  siklus:
+    external: true
+    name: siklus
